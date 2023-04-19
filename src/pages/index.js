@@ -21,6 +21,7 @@ export default function Home() {
     handleNextPage,
     handlePrevPage,
     signInWithGoogle,
+    logOut,
   } = useGiphySearch();
 
   const SearchContainer = (
@@ -61,6 +62,7 @@ export default function Home() {
         {user ? (
           <>
             {SearchContainer}
+            <button onClick={logOut}>Sign Out </button>
             {!loading && !error && data ? (
               <div>
                 {data.map((gif) => (

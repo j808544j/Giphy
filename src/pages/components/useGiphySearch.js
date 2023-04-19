@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
 import app from "../../../firebase";
+import Cookies from "js-cookie";
 
 function useGiphySearch() {
   const [data, setData] = useState(null);
@@ -65,16 +72,40 @@ function useGiphySearch() {
 
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
-      .then((result) => {
-        setUser(result.user);
-      })
+      .then((result) => {})
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         const email = error.email;
         setError(`Error while signin using ${email} - ${errorMessage} `);
       });
   };
+
+  const logOut = () => {
+    signOut(auth)
+      .then(() => {
+        setUser(null);
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  };
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setUser(user);
+      Cookies.set("user", JSON.stringify(user));
+    } else {
+      setUser(null);
+      Cookies.remove("user");
+    }
+  });
+
+  useEffect(() => {
+    const userCookie = Cookies.get("user");
+    if (userCookie) {
+      setUser(JSON.parse(userCookie));
+    }
+  }, []);
 
   return {
     data,
@@ -91,6 +122,7 @@ function useGiphySearch() {
     handleNextPage,
     handlePrevPage,
     signInWithGoogle,
+    logOut,
   };
 }
 
