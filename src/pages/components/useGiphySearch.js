@@ -16,23 +16,20 @@ function useGiphySearch() {
   const [query, setQuery] = useState("");
   const [limit, setLimit] = useState(10);
   const [offset, setOffset] = useState(0);
-  const [searchClicked, setSearchClicked] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [user, setUser] = useState(null);
 
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
+  const debouncedQuery = useDebounce(query, 500);
 
   useEffect(() => {
     async function fetchData() {
-      if (!searchClicked) {
-        return;
-      }
       setLoading(true);
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_GIPHY_API}${process.env.NEXT_PUBLIC_GIPHY_KEY}&limit=${limit}&q=${query}&offset=${offset}`
+          `${process.env.NEXT_PUBLIC_GIPHY_API}${process.env.NEXT_PUBLIC_GIPHY_KEY}&limit=${limit}&q=${debouncedQuery}&offset=${offset}`
         );
         const data = await res.json();
         if (data?.meta?.status !== 200) {
@@ -47,17 +44,10 @@ function useGiphySearch() {
       }
     }
     fetchData();
-  }, [limit, query, searchClicked, offset]);
+  }, [limit, debouncedQuery, offset]);
 
   function handleQueryChange(event) {
     setQuery(event.target.value);
-    setSearchClicked(false);
-  }
-
-  function handleSearchClick() {
-    setCurrentPage(1);
-    setOffset(0);
-    setSearchClicked(true);
   }
 
   function handleNextPage() {
@@ -106,26 +96,38 @@ function useGiphySearch() {
       setUser(JSON.parse(userCookie));
     }
   }, []);
-
-  console.log("user", user);
-
   return {
     data,
     error,
     loading,
-    query,
+    debouncedQuery,
     limit,
     offset,
     totalPages,
     currentPage,
     user,
     handleQueryChange,
-    handleSearchClick,
     handleNextPage,
     handlePrevPage,
     signInWithGoogle,
     logOut,
   };
+}
+
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
 }
 
 export default useGiphySearch;

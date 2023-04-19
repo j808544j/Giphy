@@ -17,7 +17,7 @@ export default function Home() {
     currentPage,
     user,
     handleQueryChange,
-    handleSearchClick,
+    // handleSearchClick,
     handleNextPage,
     handlePrevPage,
     signInWithGoogle,
@@ -43,7 +43,6 @@ export default function Home() {
                 value={query}
                 onChange={handleQueryChange}
               />
-              <button onClick={handleSearchClick}>Search</button>
               {totalPages > 1 && (
                 <div>
                   <button onClick={handlePrevPage} disabled={currentPage === 1}>
