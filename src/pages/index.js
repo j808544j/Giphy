@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
 import useGiphySearch from "./components/useGiphySearch";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -17,7 +16,6 @@ export default function Home() {
     currentPage,
     user,
     handleQueryChange,
-    // handleSearchClick,
     handleNextPage,
     handlePrevPage,
     signInWithGoogle,
@@ -68,6 +66,8 @@ export default function Home() {
                     alt={gif?.title}
                     width={gif?.images?.downsized?.width}
                     height={gif?.images?.downsized?.height}
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="
+                    placeholder="blur"
                   />
                 ))}
               </div>
