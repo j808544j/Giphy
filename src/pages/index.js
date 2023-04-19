@@ -24,32 +24,6 @@ export default function Home() {
     logOut,
   } = useGiphySearch();
 
-  const SearchContainer = (
-    <div>
-      <label htmlFor="searchInput">Search:</label>
-      <input
-        id="searchInput"
-        type="text"
-        value={query}
-        onChange={handleQueryChange}
-      />
-      <button onClick={handleSearchClick}>Search</button>
-      {totalPages > 1 && (
-        <div>
-          <button onClick={handlePrevPage} disabled={currentPage === 1}>
-            Prev
-          </button>
-          {currentPage} of {totalPages} pages
-          <button
-            onClick={handleNextPage}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div>
-      )}
-    </div>
-  );
   return (
     <>
       <Head>
@@ -61,7 +35,30 @@ export default function Home() {
       <main>
         {user ? (
           <>
-            {SearchContainer}
+            <div>
+              <label htmlFor="searchInput">Search:</label>
+              <input
+                id="searchInput"
+                type="text"
+                value={query}
+                onChange={handleQueryChange}
+              />
+              <button onClick={handleSearchClick}>Search</button>
+              {totalPages > 1 && (
+                <div>
+                  <button onClick={handlePrevPage} disabled={currentPage === 1}>
+                    Prev
+                  </button>
+                  {currentPage} of {totalPages} pages
+                  <button
+                    onClick={handleNextPage}
+                    disabled={currentPage === totalPages}
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+            </div>
             <button onClick={logOut}>Sign Out </button>
             {!loading && !error && data ? (
               <div>

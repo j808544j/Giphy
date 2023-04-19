@@ -72,7 +72,9 @@ function useGiphySearch() {
 
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
-      .then((result) => {})
+      .then((result) => {
+        setUser(result.user);
+      })
       .catch((error) => {
         const errorMessage = error.message;
         const email = error.email;
@@ -92,10 +94,8 @@ function useGiphySearch() {
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      setUser(user);
       Cookies.set("user", JSON.stringify(user));
     } else {
-      setUser(null);
       Cookies.remove("user");
     }
   });
@@ -106,6 +106,8 @@ function useGiphySearch() {
       setUser(JSON.parse(userCookie));
     }
   }, []);
+
+  console.log("user", user);
 
   return {
     data,
