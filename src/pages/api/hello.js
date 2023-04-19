@@ -1,5 +1,12 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+const connectDatabase = require("../../../db");
 
-export default function handler(req, res) {
-  res.status(200).json({ name: 'John Doe' })
+export default async function handler(req, res) {
+  try {
+    const client = await connectDatabase();
+    const db = await client.db("test");
+    const data = await db.collection("comments").find({}).toArray();
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json("Internal server error" + error);
+  }
 }
