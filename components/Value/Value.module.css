@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.valueContainer {
+  width: 300px;
+  height: 260px;
+  background: #ffffff;
+  border: 1px solid #f6f6f6;
+  box-shadow: 1px 15px 23px rgba(229, 229, 229, 0.25);
+  border-radius: 40px;
+  padding: 42px 41px;
+}
+
+.valueHeader {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 110%;
+  color: #242331;
+  margin-bottom: 0;
+}
+
+.valueDescription {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 157.4%;
+  color: #797979;
+  width: 95%;
+}

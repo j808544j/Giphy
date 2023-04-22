@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 1rem;
+  background-color: #ffffff;
+}
+
+.logo {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 1.8rem;
+  line-height: 41px;
+  color: #242331;
+}
+
+.navLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 22px 50px;
+  gap: 30px;
+  list-style: none;
+  background: #f9f9f9;
+  border-radius: 39px;
+}
+
+.navLink {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  color: #242331;
+  text-decoration: none;
+}
+
+.signInButton {
+  background: #0c5bc6;
+  border-radius: 39px;
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.25;
+  color: #ffffff;
+  padding: 22px 50px;
+  border: none;
+  margin-right: 50px;
+}
+
+.subContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}

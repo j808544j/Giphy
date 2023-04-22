@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "Nunito";
+  src: url("/fonts/Nunito-VariableFont_wght.ttf") format("truetype");
+  font-style: normal;
+}
+
+:root {
+  --body-margin: 0;
+}
+
+body {
+  margin: var(--body-margin);
+}
