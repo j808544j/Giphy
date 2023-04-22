@@ -1,7 +1,7 @@
 import ValuesList from "../Value/Value";
 import styles from "./Careers.module.css";
 import Image from "next/image";
-import { Value } from "../Value/Value";
+
 const Careers = () => {
   return (
     <div className={styles.container}>
