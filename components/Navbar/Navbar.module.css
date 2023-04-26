@@ -4,6 +4,7 @@
   justify-content: space-evenly;
   padding: 1rem;
   background-color: #ffffff;
+  flex-wrap: wrap;
 }
 
 .logo {
@@ -25,6 +26,7 @@
   list-style: none;
   background: #f9f9f9;
   border-radius: 39px;
+  flex-wrap: wrap;
 }
 
 .navLink {
@@ -56,4 +58,5 @@
   align-items: center;
   justify-content: center;
   gap: 50px;
+  flex-wrap: wrap;
 }
